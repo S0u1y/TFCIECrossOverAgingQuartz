@@ -1,6 +1,6 @@
 ## What it do:
 
-This mod is aimed to fix the fact that TFC+IEC's quartz in the overworld is implemented as a vanilla amethys. The player would have to constantly stay in the same chunk of the geode and chunkload it for at least 90 minutes on average to (hopefully) grow fully.
+This mod is aimed to fix the fact that TFC+IEC's quartz in the overworld is implemented as a vanilla amethyst. The player would have to constantly stay in the same chunk of the geode and chunkload it for at least 90 minutes on average to (hopefully) grow fully.
 
 But with this mod, you can go back to your base and go about your TFC progression! Just come back after some time has passed and you'll see **the budding quartz blocks were still growing while you were gone!**
 
