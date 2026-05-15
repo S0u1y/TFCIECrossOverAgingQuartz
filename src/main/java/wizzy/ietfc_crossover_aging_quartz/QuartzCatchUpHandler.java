@@ -1,4 +1,4 @@
-package wizzy.ietfc_crossover_calendar_buds;
+package wizzy.ietfc_crossover_aging_quartz;
 
 import com.nmagpie.tfc_ie_addon.common.blocks.BuddingQuartzBlock;
 import net.dries007.tfc.util.calendar.Calendars;

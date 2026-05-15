@@ -1,4 +1,4 @@
-package wizzy.ietfc_crossover_calendar_buds;
+package wizzy.ietfc_crossover_aging_quartz;
 
 import net.minecraft.world.level.chunk.LevelChunk;
 import net.minecraft.resources.ResourceLocation;
@@ -11,7 +11,7 @@ public class CapabilityAttachHandler {
     @SubscribeEvent
     public static void onAttachCapabilitiesChunk(AttachCapabilitiesEvent<LevelChunk> event) {
         if (!event.getObject().getCapability(QuartzCapabilityProvider.CHANCE_CAP).isPresent()) {
-            event.addCapability(ResourceLocation.fromNamespaceAndPath(Ietfc_crossover_calendar_buds.MODID, "quartz_data"), new QuartzCapabilityProvider());
+            event.addCapability(ResourceLocation.fromNamespaceAndPath(Ietfc_crossover_aging_quartz.MODID, "quartz_data"), new QuartzCapabilityProvider());
         }
     }
 }
