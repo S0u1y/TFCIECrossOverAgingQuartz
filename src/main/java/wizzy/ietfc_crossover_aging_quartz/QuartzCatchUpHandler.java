@@ -38,8 +38,6 @@ public class QuartzCatchUpHandler {
         if (!(event.getChunk() instanceof LevelChunk chunk)) return;
 
         ChunkTickData data = chunk.getCapability(QuartzCapabilityProvider.CHANCE_CAP).orElse(null);
-        if (data == null) return;
-
         ICalendar calendar = Calendars.get(level);
 
         long currentTicks = calendar.getCalendarTicks();
@@ -122,6 +120,8 @@ public class QuartzCatchUpHandler {
     }
 
     private static void simulateGrowth(ServerLevel level, BlockPos pos, long delta) {
+        if (!level.isLoaded(pos)) return;
+
         RandomSource random = level.getRandom();
         double lambda = delta * GROWTH_PROBABILITY_PER_TICK;
         if (lambda > 30) lambda = 20; //algorithm isn't efficient for lambda > 30.
