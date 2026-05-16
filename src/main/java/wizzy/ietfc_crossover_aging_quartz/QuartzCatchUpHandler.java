@@ -101,7 +101,6 @@ public class QuartzCatchUpHandler {
             if (section.hasOnlyAir()) continue;
 
             PalettedContainer<BlockState> palette = section.getStates();
-            // Important: make sure your mod imports the correct BuddingQuartzBlock here
             if (palette.maybeHas(state -> state.getBlock() instanceof BuddingQuartzBlock)) {
 
                 int sectionMinY = chunk.getMinBuildHeight() + (i * 16);
@@ -124,16 +123,21 @@ public class QuartzCatchUpHandler {
 
     private static void simulateGrowth(ServerLevel level, BlockPos pos, long delta) {
         RandomSource random = level.getRandom();
+        double lambda = delta * GROWTH_PROBABILITY_PER_TICK;
+        if (lambda > 30) lambda = 20; //algorithm isn't efficient for lambda > 30.
 
         for (Direction dir : Direction.values()) {
-            double lambda = delta * GROWTH_PROBABILITY_PER_TICK;
-
+//            https://www.johndcook.com/blog/2010/06/14/generating-poisson-random-values/
             int stagesToGrow = 0;
-            for (int i = 0; i < 4; i++) {
-                if (random.nextDouble() < (1 - Math.exp(-lambda))) {
-                    stagesToGrow++;
-                }
-            }
+            double L = Math.exp(-lambda);
+            double p = 1.0;
+
+            do {
+                stagesToGrow++;
+                p *= random.nextDouble();
+            } while (p > L);
+            stagesToGrow--;
+            stagesToGrow = Math.min(stagesToGrow, 4);
 
             if (stagesToGrow > 0) {
                 applyGrowthStages(level, pos.relative(dir), dir, stagesToGrow);
